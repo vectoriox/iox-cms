@@ -1,0 +1,32 @@
+{
+  "connection": "default",
+  "collectionName": "galleries",
+  "info": {
+    "name": "Gallery"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "head": {
+      "type": "string"
+    },
+    "size": {
+      "type": "integer"
+    },
+    "description": {
+      "type": "string"
+    },
+    "tizer": {
+      "type": "component",
+      "repeatable": false,
+      "component": "media-item.media-item"
+    },
+    "artboards": {
+      "type": "component",
+      "repeatable": true,
+      "component": "media-item.media-item"
+    }
+  }
+}

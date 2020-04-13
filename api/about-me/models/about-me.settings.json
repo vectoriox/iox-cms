@@ -1,0 +1,36 @@
+{
+  "connection": "default",
+  "collectionName": "about_mes",
+  "info": {
+    "name": "Profile"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "info": {
+      "type": "richtext"
+    },
+    "facebook": {
+      "type": "string"
+    },
+    "instegram": {
+      "type": "string"
+    },
+    "linkedin": {
+      "type": "string"
+    },
+    "portrait": {
+      "model": "file",
+      "via": "related",
+      "plugin": "upload",
+      "required": false
+    },
+    "aboutMe": {
+      "type": "component",
+      "repeatable": true,
+      "component": "paragraphs.paragraphs"
+    }
+  }
+}

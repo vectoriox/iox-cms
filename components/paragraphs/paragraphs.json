@@ -1,0 +1,14 @@
+{
+  "info": {
+    "name": "paragraphs",
+    "icon": "align-justify"
+  },
+  "options": {},
+  "attributes": {
+    "text": {
+      "type": "richtext"
+    }
+  },
+  "connection": "default",
+  "collectionName": "components_paragraphs_paragraphs"
+}
