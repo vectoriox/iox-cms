@@ -1,0 +1,9 @@
+{
+  "compilerOptions": {
+    "webpack": true,
+    "assets":["./cms-metadata/**/*.json"],
+    "watchAssets":true
+  },
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src"
+}

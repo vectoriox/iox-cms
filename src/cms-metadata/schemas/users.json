@@ -1,0 +1,22 @@
+{
+    "metadata":{
+        "label":{
+            "he":"משתמשים",
+            "en": "Users"
+        }
+    },
+    "ui":{
+        "type":"cards"
+    },
+    "model":{
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+    }
+}

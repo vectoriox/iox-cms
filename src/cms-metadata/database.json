@@ -1,0 +1,12 @@
+{
+    "dbType": "mongodb",
+    "settings": {
+        "database": "liora-portfolio",
+        "host": "bambook-p73kk.mongodb.net",
+        "srv": "true",
+        "port": 27017,
+        "username": "admin",
+        "password": "admin"
+    }
+}
+
