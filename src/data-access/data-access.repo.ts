@@ -1,3 +1,6 @@
+import { Injectable } from "@nestjs/common";
+
+@Injectable()
 export abstract class DataAccessRepo<T> {
 
     private _models: Map<string, T>;
@@ -19,6 +22,7 @@ export abstract class DataAccessRepo<T> {
     }
     
     public getModel(modelKey:string){
+        console.log(this._models);
         return this._models[modelKey];
     }
 }

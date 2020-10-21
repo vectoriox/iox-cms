@@ -1,0 +1,40 @@
+{
+    "metadata":{
+        "label": "Product"
+    },
+    "ui":{
+        "type":"cards"
+    },
+    "model":{
+        "type": "object",
+        "properties": [
+          {
+              "label": "Product Name",
+              "type" : "string",
+              "uiType":"input"
+          },
+          {
+            "label": "Product Description",
+            "type" : "string",
+            "uiType":"input"
+          },
+          {
+            "label": "Avilabilty",
+            "type" : "boolean",
+            "uiType":"switch"
+          },
+          {
+            "label": "Gallery",
+            "type": "list",
+            "uiType":"gallery",
+            "items": [
+                {
+                    "label":"string",
+                    "type":"media",
+                    "uiType": "image"
+                }
+            ]
+          }
+        ]
+    }
+}

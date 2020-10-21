@@ -22,6 +22,7 @@ import { DataAccessRepo } from "../data-access.repo";
        }
        
        read (modelName:string, _id: string, filters:object={}) {
+            console.log(this.getModel(modelName))     
             if (!_id) {
                 return this.getModel(modelName).find(filters).exec();
             }else{

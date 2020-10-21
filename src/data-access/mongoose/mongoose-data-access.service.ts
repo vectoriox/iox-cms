@@ -24,34 +24,15 @@ export class MongooseDataAccessService extends DataAccessService{
         console.log(this.dbCOnfig);
     }
 
-    create(resource, id){
-        console.log(`Resouces Service::Create new  ${resource}`);
-        return this._mongooseDataAccessRepo.create(resource, id)
-    }
-
-    read(resource, id=null, filters){
-        console.log(`Resouces Service::Read from ${resource} id ${id}`);
-        return this._mongooseDataAccessRepo.read(resource, id ,filters);
-    }
-
-    update(resource, id, data){
-        console.log(`Resouces Service::Update from ${resource} id ${id}`);
-        return this._mongooseDataAccessRepo.update(resource, id, data);
-    }
-
-    delete(resource, id){
-        return this._mongooseDataAccessRepo.delete(resource, id);
-    }
 
     boostrapDAL(schemas:Map<string,Object>, mongoConfig){
         schemas.forEach((value:any, key:any)=>{
-            console.log(key);
-            console.log(value);
             this._resources.push(key);
             let jsonSchema = createMongooseSchema({},value);
             let mongoSchema = this._mongooseConnection.model(key, new mongoose.Schema(jsonSchema));
             this._mongooseDataAccessRepo.addModel(key, mongoSchema);
         })
+        console.log(this._mongooseDataAccessRepo);
         this.dbConnect(mongoConfig)
     }
 
