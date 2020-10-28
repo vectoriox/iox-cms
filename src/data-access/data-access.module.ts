@@ -1,10 +1,9 @@
 import { Module, DynamicModule } from '@nestjs/common';
-import { DataAccessRepo } from './data-access.repo';
-import { DataAccessService } from './data-access.service';
+import { DataAccessRepoService } from './data-access-repo.service';
+import { DataAccessModelService } from '../data-access/data-access-model.service'
 import { MongooseDataAccessModule} from "./mongoose/mongoose-data-access.module"
-import { MongooseDataAccessRepo } from './mongoose/mongoose-data-access.repo';
-import { MongooseDataAccessService } from './mongoose/mongoose-data-access.service';
-
+import { MongooseDataAccessRepoService } from './mongoose/mongoose-data-access-repo.service';
+import { MongooseDataAccessModelService } from './mongoose/mongoose-data-access-model.service'
 @Module({})
 export class DataAccessModule{
 
@@ -13,7 +12,7 @@ export class DataAccessModule{
         return{
             module: DataAccessModule,
             ...mongoConfig,
-            exports:[DataAccessRepo, DataAccessService]
+            exports:[DataAccessModelService, DataAccessRepoService]
         }  
     }
 
@@ -30,8 +29,8 @@ export class DataAccessModule{
         return {
             imports:[MongooseDataAccessModule],
             providers:[
-                {provide:DataAccessService,useClass:MongooseDataAccessService},
-                {provide:DataAccessRepo,useClass:MongooseDataAccessRepo}
+                {provide:DataAccessModelService,useClass:MongooseDataAccessModelService},
+                {provide:DataAccessRepoService,useClass:MongooseDataAccessRepoService}
             ]
         }
     }

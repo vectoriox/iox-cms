@@ -1,10 +1,10 @@
 import { Injectable } from "@nestjs/common";
-import { DataAccessRepo } from "src/data-access/data-access.repo";
+import { DataAccessRepoService } from "../data-access/data-access-repo.service";
 
 @Injectable()
 export class ResourcesService {
     
-    constructor(private _dataAccessRepo: DataAccessRepo<any>){}
+    constructor(private _dataAccessRepo: DataAccessRepoService<any>){}
 
     create(resource, id){
         console.log(`Resouces Service::Create new  ${resource}`);

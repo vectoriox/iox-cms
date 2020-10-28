@@ -1,11 +1,11 @@
 import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
-import { MongooseDataAccessRepo } from './mongoose-data-access.repo';
-import { MongooseDataAccessService } from './mongoose-data-access.service';
+import { MongooseDataAccessRepoService } from './mongoose-data-access-repo.service';
+import { MongooseDataAccessModelService } from './mongoose-data-access-model.service';
 
 
 @Module({
-  providers: [MongooseDataAccessService, MongooseDataAccessRepo], 
-  exports:[MongooseDataAccessService, MongooseDataAccessRepo]
+  providers: [MongooseDataAccessRepoService, MongooseDataAccessModelService], 
+  exports:[MongooseDataAccessRepoService, MongooseDataAccessModelService]
 })
 export class MongooseDataAccessModule {
 }
