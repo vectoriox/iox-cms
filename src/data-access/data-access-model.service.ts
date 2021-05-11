@@ -3,20 +3,10 @@ import { Injectable } from "@nestjs/common";
 @Injectable()
 export abstract class DataAccessModelService {
 
-    private _models: Map<string, any>;
-
-    constructor() { 
-    }
-
-    abstract buildModel(schema:any);
+    abstract buildModel(schema:any, isSystemSchema?:boolean);
     
-    public addModel(modelKey: string, model:any){
-        this._models[modelKey] = model;
-    }
+    abstract addModel(modelKey: string, model:any);
     
-    public getModel(modelKey:string){
-        console.log(this._models);
-        return this._models[modelKey];
-    }
+    abstract getModel(modelKey:string);
 }
 

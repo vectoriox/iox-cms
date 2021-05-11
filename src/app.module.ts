@@ -3,49 +3,34 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ResourcesModule } from './resources/resources.module';
 import { ConfigModule } from '@nestjs/config';
-import { DatabaseConfig } from './config/app.config';
-import * as fs from 'fs';
-import * as util from 'util';
+import { DatabaseConfig, InitialUserConfig } from './config/app.config';
 import { DataAccessModule } from './data-access/data-access.module';
+import { SchemasModule } from './schemas/schemas.module';
+import { UsersModule } from './users/users.module'
+import { AuthModule } from './auth/auth.module'; 
+import { APP_GUARD } from '@nestjs/core';
+import { JwtAuthGuard } from './auth/jwt-auth.guard';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
     isGlobal: true,
-    load:[DatabaseConfig]
+    load:[DatabaseConfig, InitialUserConfig]
   }),
   DataAccessModule.register({ dbType: "mongo" }), 
-  ResourcesModule],
+  SchemasModule,
+  UsersModule,
+  ResourcesModule,
+  AuthModule],
   controllers: [AppController],
-  providers: [AppService],
+  providers: [AppService,{
+    provide: APP_GUARD,
+    useClass: JwtAuthGuard,
+  },],
 })
 export class AppModule {
-  constructor(){
+  constructor(private _appService: AppService){
     console.log("app started!!!!")
-    //this.getsSchemas();
+    this._appService.initializer();
   }
-
-
-  // private async getsSchemas(){
-  //   let readFile = util.promisify(fs.readFile);
-  //   let readdir = util.promisify(fs.readdir);
-  //   let SCHEMAS = new Map <string,any>();
-  //   let promises = [];
-
-  //   try{
-  //         let filesList= await readdir(`${__dirname}/schemas/defaults`,{withFileTypes:true})
-  //         filesList.forEach((fileMetaData)=>{
-  //           promises.push(readFile(`${__dirname}/schemas/defaults/${fileMetaData.name}`).then((file)=>{ 
-  //             let scehma = new Object();
-  //             return[ fileMetaData.name.split('.')[0],  JSON.parse(file.toString()).model];
-  //           })); 
-  //         })
-  //         return Promise.all(promises).then((res)=>{
-  //           let schemas = new Map<string,object>(res);
-  //           //this._dataAccessService.boostrapDAL(schemas,{});
-  //         })
-  //   }catch(e){
-  //    console.log(e);
-  //   }
-  // }
 }

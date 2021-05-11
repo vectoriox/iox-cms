@@ -10,30 +10,18 @@
         "properties": [
           {
               "label": "Product Name",
-              "type" : "string",
-              "uiType":"input"
+              "uiType":"text",
+              "inputType":"string"
           },
           {
             "label": "Product Description",
-            "type" : "string",
-            "uiType":"input"
+            "uiType":"text",
+            "inputType":"input"
           },
           {
             "label": "Avilabilty",
-            "type" : "boolean",
+            "inputType" : "string",
             "uiType":"switch"
-          },
-          {
-            "label": "Gallery",
-            "type": "list",
-            "uiType":"gallery",
-            "items": [
-                {
-                    "label":"string",
-                    "type":"media",
-                    "uiType": "image"
-                }
-            ]
           }
         ]
     }

@@ -1,5 +1,5 @@
 import { Module, MiddlewareConsumer, NestModule } from '@nestjs/common';
-import { DataAccessModule } from 'src/data-access/data-access.module';
+import { DataAccessModule } from '../data-access/data-access.module';
 import { ResourcesController } from './resources.controller';
 import { ResourcesMiddleware } from "./resources.middleware";
 import { ResourcesService } from './resoueces.service';

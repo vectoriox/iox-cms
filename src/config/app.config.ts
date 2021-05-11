@@ -7,11 +7,8 @@ export interface IAppConfigType {
 
 export class AppConfig{
     public static readonly DatabaseConfig = "database";
+    public static readonly InitialUserConfig = "initialUser";
 }
-
-
-
-
 
 export interface DatabaseConfig {
     type: string;
@@ -23,14 +20,26 @@ export interface DatabaseConfig {
     password: string;
 }
 
+export interface InitialUserConfig {
+    email: string;
+    pass: string;
+}
+
 export var DatabaseConfig = registerAs(AppConfig.DatabaseConfig, () => ({
      
         type: process.env.DB_TYPE,
         host: process.env.DB_HOST,
         port: process.env.DB_PORT,
         name: process.env.DB_NAME,
-        isSrv: process.env.DB_IS_SRV,
+        isSrv: process.env.DB_IS_SRV == "true" ? true:false,
         user: process.env.DB_USR,
         password: process.env.DB_PASS
     
+}));
+
+export var InitialUserConfig = registerAs(AppConfig.InitialUserConfig, () => ({
+     
+    email: process.env.INIT_USER_EMAIL,
+    pass: process.env.INIT_USER_PASS
+
 }));

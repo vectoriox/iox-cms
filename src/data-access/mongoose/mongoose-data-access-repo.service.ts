@@ -18,6 +18,7 @@ import { DataAccessRepoService } from "../data-access-repo.service";
        }
        
        create (model:any, item: T) {
+           console.log(model);
            return model.create(item);    
        }
        

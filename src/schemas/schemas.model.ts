@@ -1,81 +1,78 @@
-import { Document, Schema, Model, model} from "mongoose";
+import { Injectable } from "@nestjs/common";
 import { DataAccessModelService } from "../data-access/data-access-model.service";
 
-// {
-//     "metadata":{
-//         "label": "Users"
-//     },
-//     "ui":{
-//         "type":"cards"
-//     },
-//     "model":{
-//         "type": "object",
-//         "properties": {
-//           "email": {
-//             "type": "string"
-//           },
-//           "name": {
-//             "type": "string"
-//           },
-//           "password":{
-//             "type":"string"
-//           },
-//           "role":{
-//             "type": "string"
-//           },
-//           "profilePic":{
-//             "type":"string"
-//           }
-//         }
-//     }
-// }
-// {
 
-//     "metadata":{
-//         "label": "Product"
-//     },
-//     "ui":{
-//         "type":"cards"
-//     },
-//     "model":{
-//         "type": "object",
-//         "properties": [
-//           {
-//               "label": "Product Name",
-//               "type" : "string",
-//               "uiType":"input"
-//           },
-//           {
-//             "label": "Product Description",
-//             "type" : "string",
-//             "uiType":"input"
-//           },
-//           {
-//             "label": "Avilabilty",
-//             "type" : "boolean",
-//             "uiType":"switch"
-//           },
-//           {
-//             "label": "Gallery",
-//             "type": "list",
-//             "uiType":"gallery",
-//             "items": [
-//                 {
-//                     "label":"string",
-//                     "type":"media",
-//                     "uiType": "image"
-//                 }
-//             ]
-//           }
-//         ]
-//     }
-// }
-var schemasModel: Schema = new Schema();
 
-class SchemaModel {
+// interface ISchemaMetaData{
+//    lable:IschemaObjectModel;
+// }
+
+// interface IschemaModel{
+//    type:InputTypes;
+//    unique?:boolean;
+//    properties?: {[key:string]:IschemaObjectModel};
+//    items?: IschemaObjectModel;
+// }
+
+// interface IschemaModel{
+//    name:string
+//    metaData:ISchemaMetaData;
+//    model:IschemaObjectModel;
+// }
+
+
+
+
+// enum InputTypes {
+//    ARRAY= "array",
+//    OBJECT = "object",
+//    NUMBER = "number",
+//    DATE = "data",
+//    STRING = "string"
+//    IMAGE = "image",
+//    VIDEO = "video",
+//    TEXT = "text",
+//    SELECT = "select",
+//  }
+
+
+// var schemasModel: IschemaModel = {
+//    metaData: {
+//       name:{
+//          type:InputTypes.STRING
+//       },
+//       lable:{
+//          type:InputTypes.STRING
+//       }
+//    },
+//    model:{
+//       type:InputTypes.OBJECT,
+//    }
+// }
+
+
+var schemasModel: object = {
+   type:"object",
+   properties:{
+      name:{
+         type:"string"
+      },
+      metaData:{
+          "label": "schemas"
+      }, 
+      schemaObject: {
+          type: "object",
+          properties: {
+          }
+      }
+   }
+}
+
+@Injectable()
+export class SchemaModel {
      constructor(private _dataAccessModelService:DataAccessModelService){
-        let mode = this._dataAccessModelService.buildModel(schemasModel);
+        let model = this._dataAccessModelService.buildModel(schemasModel,true);
         this._dataAccessModelService.addModel("schemas",model);
      }
-
 }
+
