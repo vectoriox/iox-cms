@@ -12,7 +12,8 @@ export class SchemasController {
     }
 
     @Get()
-    readAll( @Query()queryParams?): void {
+    readAll( @Query()queryParams?) {
+      return this._schemasServiceService.getSchema(null,queryParams);
     }
 
       @Get(':id')

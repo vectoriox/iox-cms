@@ -105,26 +105,6 @@ export class MongooseDataAccessModelService extends DataAccessModelService{
             }
             delete schema.label;
         }
-        
-        // for (var key in schema) {
-        //     if (schema[key].type == "object") {
-        //         this._IOXschemaToValidJsonSchema(schema[key].properties);
-        //     } else if (schema[key].type == "array") {
-        //             if(schema[key].items.type == "object"){
-        //                 this._IOXschemaToValidJsonSchema(schema[key].items.properties);
-        //             }
-        //     } else {
-        //         if(schema[key].type == "select"){
-        //             schema[key].type = "string"
-        //             schema[key].enum = [];
-        //             for(var i=0;i < schema[key].options.length;i++){
-        //                 schema[key].enum.push(schema[key].options[i].value);
-        //             }
-        //             delete schema[key].options;
-        //         }
-        //         delete schema[key].label;
-        //     }
-        // }
         return schema;
     }
 
