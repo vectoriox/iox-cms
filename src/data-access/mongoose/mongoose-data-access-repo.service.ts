@@ -18,7 +18,6 @@ import { DataAccessRepoService } from "../data-access-repo.service";
        }
        
        create (model:any, item: T) {
-           console.log(model);
            return model.create(item);    
        }
        
@@ -34,7 +33,7 @@ import { DataAccessRepoService } from "../data-access-repo.service";
        }
        
        update (model:any, _id: string, item: T) {
-           return  model.update({_id: _id}, item).exec();
+           return  model.findOneAndUpdate({_id: _id}, item,{new:true}).exec();
                
        }
            

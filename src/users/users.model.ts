@@ -7,7 +7,7 @@ export interface IUserModel{
    email: string;
    profilePic?:string;
    pass: string;
-   roles: string[];
+   role: string;
 }
 
 var userSchema: object = {
@@ -30,16 +30,18 @@ var userSchema: object = {
       profilePic: {
          type: "string"
       },
+      color:{
+         type:"string"
+      },
       pass:{
          type:"string"
       },
-      roles: {
-         type: "array",
-         items:{
-            type:"string",
-            enum: ["owner", "admin", "user"]
-         }
-         
+      role: {
+         type: "string",
+         enum: ["owner", "admin", "user"]
+      },
+      lastAccess: {
+         type:"number",
       }
    }
 }

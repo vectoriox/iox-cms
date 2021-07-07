@@ -19,4 +19,17 @@ export class AppController {
   async login(@Request() req) {
     return this._authService.login(req.user);
   }
+
+  @Public()
+  @Get('ping')
+  @Post('ping')
+  async ping(@Request() req) {
+    return "pong"
+  }
+
+  @Public()
+  @Post('mock')
+  async fake(){
+    return "alive"
+  }
 }

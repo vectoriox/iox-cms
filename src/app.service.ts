@@ -38,7 +38,7 @@ export class AppService {
     let user:IUserModel = {
        email: intialUserConfig.email,
        pass: intialUserConfig.pass,
-       roles: ["owner"]
+       role: "owner"
     } 
     let res = await this._userService.createUser(user);
     console.log(res);

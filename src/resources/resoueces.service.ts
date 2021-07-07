@@ -7,9 +7,10 @@ export class ResourcesService {
     
     constructor(private _dataAccessRepo: DataAccessRepoService<any>, private _dataAccessModelService: DataAccessModelService){}
 
-    create(resource, id){
+    create(resource, data){
         console.log(`Resouces Service::Create new  ${resource}`);
-        return this._dataAccessRepo.create(resource, id)
+        let model = this._dataAccessModelService.getModel(resource);
+        return this._dataAccessRepo.create(model, data)
     }
     
     read(resource, id=null, filters?){
@@ -20,10 +21,12 @@ export class ResourcesService {
     
     update(resource, id, data){
         console.log(`Resouces Service::Update from ${resource} id ${id}`);
-        return this._dataAccessRepo.update(resource, id, data);
+        let model = this._dataAccessModelService.getModel(resource);
+        return this._dataAccessRepo.update(model, id, data);
     }
     
     delete(resource, id){
-        return this._dataAccessRepo.delete(resource, id);
+        let model = this._dataAccessModelService.getModel(resource);
+        return this._dataAccessRepo.delete(model, id);
     }
 }

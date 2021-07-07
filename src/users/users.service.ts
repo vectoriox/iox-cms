@@ -12,6 +12,10 @@ export class UsersService {
     }
 
     async createUser(item: any) {
+        let user = await this._dataAccessRepoService.read(this.userModel,null, {email:item.email});
+        if(user.length){
+             return Promise.reject({message:"user already exist"});
+        }
         item.pass = bcrypt.hashSync(item.pass, 10);
         return this._dataAccessRepoService.create(this.userModel, item);
     }
@@ -21,7 +25,7 @@ export class UsersService {
     }
 
     async updateUser(id: string, item: any) {
-        return  this._dataAccessRepoService.update(this.updateUser, id, item);
+        return  this._dataAccessRepoService.update(this.userModel, id, item);
         
     }
 

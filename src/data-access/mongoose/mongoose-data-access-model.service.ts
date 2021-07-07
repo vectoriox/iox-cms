@@ -33,6 +33,15 @@ export class MongooseDataAccessModelService extends DataAccessModelService{
                 mongooseSchema[key].unique = true;
             }
         })
+        jsonSchema.properties['created'] ={
+            label:"Created At",
+            type:'number'
+        }
+
+        jsonSchema.properties['lastUpdate'] ={
+            label:"Last Udate",
+            type:'number'
+        }
 
         mongooseSchema = new mongoose.Schema(createMongooseSchema({},jsonSchema));
         return mongooseSchema;
@@ -53,7 +62,8 @@ export class MongooseDataAccessModelService extends DataAccessModelService{
         if(dbCOnfig.isSrv){
             MONGODB_CONNECTION = `mongodb+srv://${dbCOnfig.user}:${dbCOnfig.password}@${dbCOnfig.host}/${dbCOnfig.name}?retryWrites=true&w=majority`
         }else{
-            MONGODB_CONNECTION = `mongodb://${dbCOnfig.user}:${dbCOnfig.password}@${dbCOnfig.host}:${dbCOnfig.port}/${dbCOnfig.name}`
+            let auth = dbCOnfig.user && dbCOnfig.password ? `${dbCOnfig.user}:${dbCOnfig.password}@`:'';
+            MONGODB_CONNECTION = `mongodb://${auth}${dbCOnfig.host}:${dbCOnfig.port}/${dbCOnfig.name}`
         }
 
         return MONGODB_CONNECTION
@@ -70,7 +80,6 @@ export class MongooseDataAccessModelService extends DataAccessModelService{
         });
         
        let connString = this.generateConnectionString(mongoConfig);
-
        const options:mongoose.ConnectionOptions = {
         useNewUrlParser: true,
         useCreateIndex: true,
@@ -94,6 +103,8 @@ export class MongooseDataAccessModelService extends DataAccessModelService{
             }
         }else if(schema.type == "array" && schema.items.type == "object"){
             this._IOXschemaToValidJsonSchema(schema.items);
+        }else if(schema.type == "image" || schema.type == "text"){
+            schema.type = "string"
         }else{
             if(schema.type == "select"){
                 schema.type = "string"
