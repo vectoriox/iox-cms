@@ -4,17 +4,20 @@ ARG ENV
 
 COPY . /tmp/iox-cms-server
 
-RUN npm install -g @nestjs/cli \ 
+RUN apk add --no-cache git
+
+RUN npm i -g @nestjs/cli \ 
     && mkdir /opt/iox-cms-client \
     && mkdir /opt/iox-cms-server \
+    && mkdir /opt/iox-cms-server/node_modules \
     && cd /tmp/iox-cms-server \
     && npm install \
-    #&& if [ "$ENV" = "test" ] ; then ng build ; else ng build --prod ; fi \
     && npm run build \
     && cp -r /tmp/iox-cms-server/dist/. /opt/iox-cms-server \
-    && rm -r /tmp/iox-cms-server 
+    && cp -r /tmp/iox-cms-server/node_modules/. /opt/iox-cms-server/node_modules \
+    && rm -r /tmp/iox-cms-server
 
-WORKDIR /opt/iox-cms
-RUN node main.js
+WORKDIR /opt/iox-cms-server
+CMD node main.js
 
 EXPOSE 3000 3000
